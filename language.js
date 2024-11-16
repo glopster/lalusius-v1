@@ -1,6 +1,6 @@
 export const wordMap = {
   "hello": "zhorp",
-  "goodbye": "aglorf",
+  "bye": "aglorf",
   "yes": "yorg",
   // Add more word mappings as needed
 };
