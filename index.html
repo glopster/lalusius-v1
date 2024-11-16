@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lalusius Brimfon</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="translator_property">
+            <ul class="nuv_item">
+                <li>
+                    <select id="languageSelect1">
+                        <option value="eng">Bleebla</option>
+                        <option value="lal">Lalusius</option>
+                    </select>
+                </li>
+                <li class="bx bx-transfer" id="switchLang"></li>
+                <li>
+                    <select id="languageSelect2">
+                        <option value="lal">Lalusius</option>
+                        <option value="eng">Bleebla</option>
+                    </select>
+                </li>
+            </ul>
+            <div class="write_box">
+                <div class="Property_from">
+                    <textarea maxlength="9999" class="fromText" placeholder="Plarb Zoemah" id="inputText"></textarea>
+                    <div class="icons">
+                        <span class="bx bx-copy" id="copyInput"></span>
+                        <div class="code_length">0/9999</div>
+                    </div>
+                </div>
+                <div class="Property_trans">
+                    <textarea name="toTranslate" id="outputText" readonly></textarea>
+                    <div class="icons">
+                        <span class="bx bx-copy" id="copyOutput"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="./language.js"></script>
+    <script type="module" src="./main.js"></script>
+
+</body>
+</html>
