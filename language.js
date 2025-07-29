@@ -65,8 +65,8 @@ export const wordMap = {
   "dollar": "lapung", //Alien Currency
   "dollar": "lap",
   "blessed": "longlius", //blessed by alien god
-  "": "",
-  "": "",
+  "in": "floom",
+  "on": "floom",
   "also": "lul",
   "name": "lungl",
   "to": "ak",
@@ -126,6 +126,10 @@ export const wordMap = {
   "self": "zhe",
   "because": "glorpea",
   "me": "uw",
+  "ass": "zeezlha",
+  "butt": "kloin",
+  "molest": "blarp",
+  "": "",
   "": "",
  
   ///////VERBS//////
