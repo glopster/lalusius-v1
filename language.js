@@ -57,7 +57,7 @@ export const wordMap = {
   "lgas": "zunger", //light green alien slur
   "by": "glis",
   "god": "glius",
-  "Nice": "dyrpa",
+  "nice": "dyrpa",
   "lgar": "zonge", //light green alien race
   "dgar": "gauvha", //dark green alien race
   "guy": "zinp",
