@@ -50,8 +50,8 @@ export const wordMap = {
   "translate": "brimfon",
   "ok": "blavb",
   "okay": "blavb",
-  "don't": "Vlorg",
-  "dont": "Vlorg",
+  "don't": "vlorg",
+  "dont": "vlorg",
   "something": "zoemah",
   "faggot": "nungus",
   "lgas": "zunger", //light green alien slur
