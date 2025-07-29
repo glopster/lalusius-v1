@@ -16,13 +16,52 @@ function transformText() {
     const inputText = document.getElementById('inputText').value;
     const words = inputText.split(/\s+/); // Split input into words
 
-    // Map words to transformed versions or [null] for unrecognized non-empty words
+    // Map words to transformed versions or keep them unchanged if not found in word map
     const transformedWords = words.map(word => {
-        if (word.trim() === '') {
-            return ''; // Ignore empty or whitespace-only entries
+    if (word.trim() === '') {
+        return ''; // Ignore empty or whitespace-only entries
+    }
+
+    // If translating from English to custom language
+    if (currentWordMap === wordMap) {
+        let isPlural = false;
+        let baseWord = word;
+
+        // Handle regular plurals (e.g., "cats" → "cat")
+        if (word.endsWith('s')) {
+            const singular = word.slice(0, -1);
+            if (currentWordMap.hasOwnProperty(singular)) {
+                baseWord = singular;
+                isPlural = true;
+            }
         }
-        return currentWordMap.hasOwnProperty(word) ? currentWordMap[word] : '[null]';
-    });
+
+        if (currentWordMap.hasOwnProperty(baseWord)) {
+            const translated = currentWordMap[baseWord];
+            return isPlural ? translated + 'qa' : translated;
+        } else {
+            return word; // Not found in map
+        }
+
+    // If translating from custom language to English
+    } else {
+        let isPlural = false;
+        let baseWord = word;
+
+        if (word.endsWith('qa')) {
+            baseWord = word.slice(0, -2); // Remove "qa" suffix
+            isPlural = true;
+        }
+
+        if (currentWordMap.hasOwnProperty(baseWord)) {
+            const translated = currentWordMap[baseWord];
+            return isPlural ? translated + 's' : translated;
+        } else {
+            return word;
+        }
+    }
+});
+
 
     // Join transformed words (ignoring empty results) and output to the second textarea
     document.getElementById('outputText').value = transformedWords.filter(w => w !== '').join(' ');
@@ -31,6 +70,7 @@ function transformText() {
     const characterCount = inputText.replace(/\s/g, '').length; // Count characters, ignoring spaces
     document.querySelector('.code_length').textContent = `${characterCount}/9999`;
 }
+
 
 // Add an event listener to the input textarea to update the output and character count in real time
 document.getElementById('inputText').addEventListener('input', transformText);
