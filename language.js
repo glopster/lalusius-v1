@@ -107,6 +107,7 @@ export const wordMap = {
   "bye": "aglorf",
   "gay": "gay",
   "all": "plaqa",
+  "me": "uw",
  
   ///////VERBS//////
 
