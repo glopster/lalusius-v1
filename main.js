@@ -22,14 +22,26 @@ function transformText() {
         return ''; // Ignore empty or whitespace-only entries
     }
 
-    // If translating from English to custom language
+    const originalWord = word;
+    const lowerWord = word.toLowerCase();
+
+    // Preserve case style: all caps, title case, or lowercase
+    const preserveCase = (translated, original) => {
+        if (original === original.toUpperCase()) {
+            return translated.toUpperCase();
+        } else if (original[0] === original[0].toUpperCase()) {
+            return translated[0].toUpperCase() + translated.slice(1);
+        } else {
+            return translated;
+        }
+    };
+
     if (currentWordMap === wordMap) {
         let isPlural = false;
-        let baseWord = word;
+        let baseWord = lowerWord;
 
-        // Handle regular plurals (e.g., "cats" → "cat")
-        if (word.endsWith('s')) {
-            const singular = word.slice(0, -1);
+        if (lowerWord.endsWith('s')) {
+            const singular = lowerWord.slice(0, -1);
             if (currentWordMap.hasOwnProperty(singular)) {
                 baseWord = singular;
                 isPlural = true;
@@ -38,29 +50,30 @@ function transformText() {
 
         if (currentWordMap.hasOwnProperty(baseWord)) {
             const translated = currentWordMap[baseWord];
-            return isPlural ? translated + 'qa' : translated;
+            const result = isPlural ? translated + 'qa' : translated;
+            return preserveCase(result, originalWord);
         } else {
-            return word; // Not found in map
+            return originalWord;
         }
-
-    // If translating from custom language to English
     } else {
         let isPlural = false;
-        let baseWord = word;
+        let baseWord = lowerWord;
 
-        if (word.endsWith('qa')) {
-            baseWord = word.slice(0, -2); // Remove "qa" suffix
+        if (lowerWord.endsWith('qa')) {
+            baseWord = lowerWord.slice(0, -2);
             isPlural = true;
         }
 
         if (currentWordMap.hasOwnProperty(baseWord)) {
             const translated = currentWordMap[baseWord];
-            return isPlural ? translated + 's' : translated;
+            const result = isPlural ? translated + 's' : translated;
+            return preserveCase(result, originalWord);
         } else {
-            return word;
+            return originalWord;
         }
     }
 });
+
 
 
     // Join transformed words (ignoring empty results) and output to the second textarea
