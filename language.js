@@ -160,7 +160,7 @@ export const wordMap = {
   "together": "piaubla",
   "worse": "crixxak",
   "better": "crouxiak",
-  "us": "lubs",
+  "we": "glerbo",
   "": "",
   "": "",
  
