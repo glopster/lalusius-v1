@@ -193,7 +193,7 @@ export const wordMap = {
   "update": "fleebnar",
   "enslave": "praglav",
   "welcome": "meon",
-  "": "",
+  "change": "blorgla",
   "": "",
   "": "",
   
