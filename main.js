@@ -40,13 +40,14 @@ function transformText() {
         let isPlural = false;
         let baseWord = lowerWord;
 
-        if (lowerWord.endsWith('s')) {
-            const singular = lowerWord.slice(0, -1);
-            if (currentWordMap.hasOwnProperty(singular)) {
-                baseWord = singular;
-                isPlural = true;
-            }
-        }
+        if (
+        lowerWord.endsWith('s') &&
+        currentWordMap.hasOwnProperty(lowerWord.slice(0, -1)) && // singular exists
+        !currentWordMap.hasOwnProperty(lowerWord) // don't mistake real singular like "glass"
+    ) {
+        baseWord = lowerWord.slice(0, -1);
+        isPlural = true;
+    }
 
         if (currentWordMap.hasOwnProperty(baseWord)) {
             const translated = currentWordMap[baseWord];
@@ -59,10 +60,14 @@ function transformText() {
         let isPlural = false;
         let baseWord = lowerWord;
 
-        if (lowerWord.endsWith('qa')) {
-            baseWord = lowerWord.slice(0, -2);
-            isPlural = true;
-        }
+        if (
+          lowerWord.endsWith('qa') &&
+          currentWordMap.hasOwnProperty(lowerWord.slice(0, -2)) &&
+          !currentWordMap.hasOwnProperty(lowerWord) // not a base word that ends in "qa"
+    ) {
+          baseWord = lowerWord.slice(0, -2);
+          isPlural = true;
+    }
 
         if (currentWordMap.hasOwnProperty(baseWord)) {
             const translated = currentWordMap[baseWord];
