@@ -75,7 +75,7 @@ export const wordMap = {
   "please": "Kohndya",
   "so": "orvk",
   "time": "qunsp",
-  "will": "ung ",
+  "will": "ung",
   "trial": "yarkfla",
   "stfu": "bongigloo",
   "results": "ryunfa",
