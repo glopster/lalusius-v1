@@ -185,6 +185,10 @@ export const wordMap = {
   "play": "vuag",
   "drop": "grulm",
   "update": "fleebnar",
+  "enslave": "praglav",
+  "": "",
+  "": "",
+  "": "",
   "": "",
   
   // Add more word mappings as needed
