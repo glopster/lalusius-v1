@@ -18,14 +18,18 @@ function transformText() {
 
     // Map words to transformed versions or keep them unchanged if not found in word map
     const transformedWords = words.map(word => {
-    if (word.trim() === '') {
-        return ''; // Ignore empty or whitespace-only entries
-    }
+    if (word.trim() === '') return '';
 
     const originalWord = word;
-    const lowerWord = word.toLowerCase();
 
-    // Preserve case style: all caps, title case, or lowercase
+    // Split word into prefix, core, suffix
+    const match = originalWord.match(/^([^\w]*)(\w+)([^\w]*)$/); 
+    if (!match) return word; // If it doesn't match a word pattern, return as-is
+
+    const [_, prefix, coreWordRaw, suffix] = match;
+    const coreWord = coreWordRaw.toLowerCase();
+
+    // Preserve case style
     const preserveCase = (translated, original) => {
         if (original === original.toUpperCase()) {
             return translated.toUpperCase();
@@ -36,48 +40,51 @@ function transformText() {
         }
     };
 
+    // === English to Custom Language ===
     if (currentWordMap === wordMap) {
         let isPlural = false;
-        let baseWord = lowerWord;
+        let baseWord = coreWord;
 
         if (
-        lowerWord.endsWith('s') &&
-        currentWordMap.hasOwnProperty(lowerWord.slice(0, -1)) && // singular exists
-        !currentWordMap.hasOwnProperty(lowerWord) // don't mistake real singular like "glass"
-    ) {
-        baseWord = lowerWord.slice(0, -1);
-        isPlural = true;
-    }
+            coreWord.endsWith('s') &&
+            currentWordMap.hasOwnProperty(coreWord.slice(0, -1)) &&
+            !currentWordMap.hasOwnProperty(coreWord)
+        ) {
+            baseWord = coreWord.slice(0, -1);
+            isPlural = true;
+        }
 
         if (currentWordMap.hasOwnProperty(baseWord)) {
             const translated = currentWordMap[baseWord];
-            const result = isPlural ? translated + 'qa' : translated;
-            return preserveCase(result, originalWord);
+            const finalWord = isPlural ? translated + 'qa' : translated;
+            return prefix + preserveCase(finalWord, coreWordRaw) + suffix;
         } else {
             return originalWord;
         }
+
+    // === Custom Language to English ===
     } else {
         let isPlural = false;
-        let baseWord = lowerWord;
+        let baseWord = coreWord;
 
         if (
-          lowerWord.endsWith('qa') &&
-          currentWordMap.hasOwnProperty(lowerWord.slice(0, -2)) &&
-          !currentWordMap.hasOwnProperty(lowerWord) // not a base word that ends in "qa"
-    ) {
-          baseWord = lowerWord.slice(0, -2);
-          isPlural = true;
-    }
+            coreWord.endsWith('qa') &&
+            currentWordMap.hasOwnProperty(coreWord.slice(0, -2)) &&
+            !currentWordMap.hasOwnProperty(coreWord)
+        ) {
+            baseWord = coreWord.slice(0, -2);
+            isPlural = true;
+        }
 
         if (currentWordMap.hasOwnProperty(baseWord)) {
             const translated = currentWordMap[baseWord];
-            const result = isPlural ? translated + 's' : translated;
-            return preserveCase(result, originalWord);
+            const finalWord = isPlural ? translated + 's' : translated;
+            return prefix + preserveCase(finalWord, coreWordRaw) + suffix;
         } else {
             return originalWord;
         }
     }
-});
+    });
 
 
 
