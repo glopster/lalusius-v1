@@ -129,6 +129,11 @@ export const wordMap = {
   "ass": "zeezlha",
   "butt": "kloin",
   "molest": "blarp",
+  "attractive": "prilohk",
+  "": "",
+  "": "",
+  "": "",
+  "": "",
   "": "",
   "": "",
  
@@ -178,6 +183,8 @@ export const wordMap = {
   "ban": "plakla",
   "rape": "pbiblar",
   "play": "vuag",
+  "drop": "grulm",
+  "update": "fleebnar",
   "": "",
   
   // Add more word mappings as needed
