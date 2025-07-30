@@ -136,9 +136,9 @@ export const wordMap = {
   "in": "yi",
   "on": "fha",
   "from": "ushalk",
-  "": "",
-  "": "",
-  "": "",
+  "ong": "fg", //on god or fha glius
+  "antidisestablishmentarianism": "po",
+  "retard": "orgno",
   "": "",
   "": "",
   "": "",
